@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Sertifikat Keahlian 1",
+    "issuer": "Dicoding",
+    "date": "2026",
+    "description": "Menguasai pengembangan web",
+    "color": "from-blue-500 to-cyan-500",
+    "file": "/certificates/sertifikat-1.pdf"
+  },
+  {
+    "title": "Sertifikat Keahlian 2",
+    "issuer": "Dicoding",
+    "date": "2026",
+    "description": "Menguasai pemrograman dan pengembangan web",
+    "color": "from-blue-500 to-cyan-500",
+    "file": "/certificates/sertifikat-2.pdf"
+  },
+  {
+    "title": "Sertifikat Keahlian Profesional 3",
+    "issuer": "Dicoding",
+    "date": "2026",
+    "description": "Menguasai skill pengembangan web",
+    "color": "from-blue-500 to-cyan-500",
+    "file": "/certificates/sertifikat-3.pdf"
+  },
+  {
+    "title": "Sertifikat Keahlian 4",
+    "issuer": "Dicoding",
+    "date": "2026",
+    "description": "Pengembangan Aplikasi Web Modern",
+    "color": "from-blue-500 to-cyan-500",
+    "file": "/certificates/sertifikat-4.pdf"
+  }
+]
