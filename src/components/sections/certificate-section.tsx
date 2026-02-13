@@ -45,15 +45,12 @@ export default function CertificateSection() {
 
       {/* MODAL PDF VIEWER */}
       <Dialog open={!!selectedCert} onOpenChange={() => setSelectedCert(null)}>
-        {/* PERUBAHAN DI SINI: tambahkan [&>button]:hidden untuk hilangkan X bawaan */}
         <DialogContent className="max-w-4xl h-[85vh] p-0 bg-zinc-950 border-zinc-800 overflow-hidden flex flex-col [&>button]:hidden">
             
-            {/* Hidden Title untuk Accessibility (Wajib ada di Radix UI) */}
             <VisuallyHidden>
                 <DialogTitle>Certificate Viewer</DialogTitle>
             </VisuallyHidden>
 
-            {/* Header Modal (Custom Close Button Kita Ada di Sini) */}
             <div className="flex justify-between items-center p-4 border-b border-zinc-800 bg-zinc-900/50 backdrop-blur">
                 <span className="text-sm font-mono text-muted-foreground">DOC VIEWER</span>
                 <button 
@@ -64,7 +61,6 @@ export default function CertificateSection() {
                 </button>
             </div>
             
-            {/* PDF Render Area */}
             <div className="flex-1 w-full h-full bg-zinc-900 relative">
                 {selectedCert ? (
                     <iframe 
@@ -84,7 +80,6 @@ export default function CertificateSection() {
   );
 }
 
-// ... TiltCard tetap sama
 function TiltCard({ cert }: { cert: Certificate }) {
     const ref = useRef<HTMLDivElement>(null);
     const x = useMotionValue(0);

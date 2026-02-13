@@ -8,10 +8,9 @@ export async function GET() {
   }
 
   try {
-    // Mengambil data 7 hari terakhir
     const response = await fetch(
       `https://wakatime.com/api/v1/users/current/stats/last_7_days?api_key=${API_KEY}`,
-      { next: { revalidate: 3600 } } // Cache selama 1 jam biar loading cepat
+      { next: { revalidate: 3600 } }
     );
 
     const data = await response.json();

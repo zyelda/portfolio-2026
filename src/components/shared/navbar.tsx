@@ -4,14 +4,12 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Terminal } from "lucide-react";
 import { cn } from "@/lib/utils";
-// 1. Import CommandMenu
-import { CommandMenu } from "@/components/command-menu"; // Sesuaikan path
+import { CommandMenu } from "@/components/command-menu";
 
 export default function Navbar() {
     const [time, setTime] = useState("");
     const [scrolled, setScrolled] = useState(false);
     
-    // 2. Buat State untuk kontrol menu
     const [openCommand, setOpenCommand] = useState(false);
 
     useEffect(() => {
@@ -40,10 +38,10 @@ export default function Navbar() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className={cn(
                     "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300",
+                    "w-full",
                     scrolled ? "bg-background/80 backdrop-blur-md border-b border-border/40" : "bg-transparent"
                 )}
             >
-                {/* Bagian Kiri (Logo) - Tetap */}
                 <div className="flex items-center gap-2">
                     <div className="p-2 bg-primary/10 rounded-lg border border-primary/20">
                         <Terminal className="w-5 h-5 text-primary" />
@@ -53,16 +51,13 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                {/* Bagian Tengah (Time) - Tetap */}
                 <div className="hidden md:flex items-center gap-6 px-4 py-2 bg-background/50 border border-border/50 rounded-full backdrop-blur-sm">
                     <span className="text-xs font-mono text-primary animate-pulse">● LIVE</span>
                     <span className="text-xs font-mono">{time} WITA</span>
                 </div>
 
-                {/* Bagian Kanan (Trigger Button) */}
                 <button 
                     className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary/50 hover:bg-secondary transition-colors text-xs font-medium border border-border/50"
-                    // 3. Ubah onClick untuk membuka CommandMenu
                     onClick={() => setOpenCommand(true)} 
                 >
                     <span>Menu</span>
@@ -72,7 +67,6 @@ export default function Navbar() {
                 </button>
             </motion.header>
 
-            {/* 4. Render CommandMenu di sini dan oper state-nya */}
             <CommandMenu open={openCommand} setOpen={setOpenCommand} />
         </>
     );

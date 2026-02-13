@@ -28,10 +28,9 @@ export default function AboutSection() {
         </p>
       </div>
 
-      {/* BENTO GRID LAYOUT */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[minmax(180px,auto)]">
 
-        {/* 1. BIOGRAPHY (Span 2 kolom) */}
+        {/* 1. BIOGRAPHY */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,7 +52,7 @@ export default function AboutSection() {
           </p>
         </motion.div>
 
-        {/* 2. LOCATION (Peta Cyber) */}
+        {/* 2. LOCATION */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -75,7 +74,7 @@ export default function AboutSection() {
           </div>
         </motion.div>
 
-        {/* 3. TECH STACK (Span 1 kolom tapi tinggi) */}
+        {/* 3. TECH STACK */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -121,7 +120,7 @@ export default function AboutSection() {
           </div>
         </motion.div>
 
-        {/* 4. EDUCATION (Timeline) */}
+        {/* 4. EDUCATION */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

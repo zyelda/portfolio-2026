@@ -1,6 +1,5 @@
 import { Groq } from "groq-sdk";
-import { supabase } from "@/lib/supabase"; // Import koneksi DB kita
-
+import { supabase } from "@/lib/supabase";
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
@@ -8,18 +7,14 @@ const groq = new Groq({
 export async function POST(req: Request) {
   try {
     const { message } = await req.json();
-
-    // 1. Ambil Data Project Terbaru dari Database (RAG Sederhana)
     const { data: projects } = await supabase
       .from('projects')
       .select('title, description, tech_stack, category');
 
-    // Format data project jadi teks agar AI bisa baca
     const projectContext = projects?.map(p => 
       `- ${p.title} (${p.category}): ${p.description}. Tech: ${p.tech_stack}`
     ).join("\n");
 
-    // 2. Tentukan Kepribadian AI (System Prompt)
     const systemPrompt = `
         IDENTITY:
         Kamu adalah "Neural V1", asisten AI canggih yang tertanam dalam sistem portfolio Aditias Zulmatoriq. Kamu bukan sekadar chatbot, tapi representasi digital dari pemikiran dan keahlian penciptamu.
@@ -71,18 +66,16 @@ export async function POST(req: Request) {
         "${message}"
     `;
 
-    // 3. Kirim ke Groq (Pakai model Llama 3 yang super cepat)
     const completion = await groq.chat.completions.create({
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: message },
       ],
-      model: "llama-3.3-70b-versatile", // Model cepat & gratis
-      temperature: 0.7, // Kreativitas seimbang
-      max_tokens: 200, // Supaya jawabannya tidak kepanjangan
+      model: "llama-3.3-70b-versatile",
+      temperature: 0.7,
+      max_tokens: 200,
     });
 
-    // 4. Kirim Balik Jawaban ke Frontend
     return new Response(JSON.stringify({ 
       reply: completion.choices[0]?.message?.content || "Maaf, sistem sedang offline." 
     }), {

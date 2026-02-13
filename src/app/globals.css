@@ -117,10 +117,6 @@
 }
 
 @layer base {
-  html {
-    scrollbar-gutter: stable; 
-  }
-  
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -136,8 +132,14 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
 
@@ -151,4 +153,31 @@
 .dark .bg-grid-white {
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* LEAFLET CUSTOM STYLES */
+.leaflet-container {
+    background: #000 !important; /* Agar background peta hitam saat loading */
+    font-family: var(--font-geist-sans);
+}
+
+/* Hilangkan outline saat marker diklik */
+.leaflet-interactive {
+    outline: none !important;
+}
+
+/* Custom Popup Style */
+.leaflet-popup-content-wrapper {
+    background: rgba(24, 24, 27, 0.9) !important; /* Zinc-900 */
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px !important;
+    color: white !important;
+    font-size: 12px;
+}
+.leaflet-popup-tip {
+    background: rgba(24, 24, 27, 0.9) !important;
+}
+.leaflet-popup-close-button {
+    display: none !important; /* Hilangkan tombol close X */
 }

@@ -5,35 +5,39 @@ import HeroSection from "@/components/sections/hero-section";
 import AboutSection from "@/components/sections/about-section";
 import CertificateSection from "@/components/sections/certificate-section";
 import StoicQuote from "@/components/ui/stoic-quote";
+import { LombokExplore } from "@/components/ui/lombok-explore";
 
 export default function Home() {
   return (
     <main className="relative min-h-screen w-full bg-background text-foreground selection:bg-primary/20">
       <Navbar />
       
-      {/* Hero Section (Client Component) */}
+      {/* Hero Section */}
       <section id="home">
         <HeroSection />
       </section>
 
+      {/* Quotes Section */}
       <StoicQuote />
 
-      {/* About Section (Bento Grid) */}
+      {/* About Section */}
       <section id="about">
         <AboutSection />
       </section>
 
-      {/* CERTIFICATES (3D TILT) */}
+      {/* Certificates Section */}
       <section id="certificates">
         <CertificateSection />
       </section>
 
-      {/* Projects Section (Server Component) */}
+      {/* Projects Section */}
       <div id="projects">
         <ProjectSection />
       </div>
 
-      {/* FOOTER */}
+      {/* 3D Map Explorer */}
+       <LombokExplore />
+
       <Footer />
     </main>
   );

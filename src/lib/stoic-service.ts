@@ -11,7 +11,7 @@ export async function getStoicQuote() {
         Berikan satu kutipan stoikisme (dari Marcus Aurelius, Seneca, atau Epictetus) 
         yang sudah dimodifikasi sedikit agar relevan dengan perjuangan seorang software developer/programmer. 
         Gunakan Bahasa Indonesia yang elegan dan mendalam. 
-        Format: "Isi kutipan" — Tokoh.
+        Format: "Isi kutipan".
         Maksimal 1 paragraf pendek (25 kata).
     `;
 

@@ -7,8 +7,6 @@ import { BrainCircuit, Sparkles, RefreshCw, X, Check, ThumbsUp, ThumbsDown } fro
 import { motion, AnimatePresence } from "framer-motion";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
-// 1. DATABASE TEKNOLOGI (KNOWLEDGE BASE)
-// Kita batasi scope-nya ke Tech Stack populer biar akurat.
 const TECH_DATABASE = [
   { name: "Python", tags: ["language", "backend", "datascience", "snake", "blue", "yellow"] },
   { name: "JavaScript", tags: ["language", "frontend", "backend", "web", "yellow"] },
@@ -27,7 +25,6 @@ const TECH_DATABASE = [
   { name: "C++", tags: ["language", "system", "performance", "blue"] },
 ];
 
-// 2. DAFTAR PERTANYAAN (DECISION NODES)
 const QUESTIONS = [
   { id: "language", text: "Apakah itu sebuah Bahasa Pemrograman?" },
   { id: "frontend", text: "Apakah sering digunakan untuk Frontend (Tampilan)?" },
@@ -47,7 +44,6 @@ export function NeuralOracle({ open, setOpen }: { open: boolean; setOpen: (open:
   const [gameState, setGameState] = useState<"INTRO" | "PLAYING" | "GUESSING" | "WIN" | "LOSE">("INTRO");
   const [guess, setGuess] = useState<any>(null);
 
-  // Reset Game
   const resetGame = () => {
     setCandidates(TECH_DATABASE);
     setStep(0);
@@ -56,14 +52,10 @@ export function NeuralOracle({ open, setOpen }: { open: boolean; setOpen: (open:
     setCurrentQ(null);
   };
 
-  // Pilih Pertanyaan Berikutnya (Logic Cerdas)
   const pickNextQuestion = (currentCandidates: typeof TECH_DATABASE) => {
-    // Cari pertanyaan yang belum ditanya dan bisa membagi kandidat
-    // (Simplifikasi: Ambil pertanyaan acak yang relevan dengan kandidat tersisa)
     const relevantTags = new Set<string>();
     currentCandidates.forEach(c => c.tags.forEach(t => relevantTags.add(t)));
     
-    // Cari pertanyaan yang id-nya ada di tags kandidat tersisa
     const possibleQuestions = QUESTIONS.filter(q => relevantTags.has(q.id));
     
     if (possibleQuestions.length === 0 || currentCandidates.length <= 1) {
@@ -71,12 +63,10 @@ export function NeuralOracle({ open, setOpen }: { open: boolean; setOpen: (open:
       return;
     }
 
-    // Ambil pertanyaan random dari yang relevan (biar variatif)
     const nextQ = possibleQuestions[Math.floor(Math.random() * possibleQuestions.length)];
     setCurrentQ(nextQ);
   };
 
-  // Proses Jawaban User
   const handleAnswer = (isYes: boolean) => {
     if (!currentQ) return;
 
@@ -87,9 +77,6 @@ export function NeuralOracle({ open, setOpen }: { open: boolean; setOpen: (open:
 
     setCandidates(nextCandidates);
     setStep(s => s + 1);
-
-    // Hapus pertanyaan ini dari daftar (biar gak nanya ulang - simplifikasi UI)
-    // Di real app, kita filter QUESTIONS array. Disini kita pakai logic pickNextQuestion
 
     if (nextCandidates.length === 1) {
       makeGuess(nextCandidates);
@@ -102,14 +89,13 @@ export function NeuralOracle({ open, setOpen }: { open: boolean; setOpen: (open:
 
   const makeGuess = (finalCandidates: typeof TECH_DATABASE) => {
     if (finalCandidates.length > 0) {
-      setGuess(finalCandidates[0]); // Tebak yang pertama
+      setGuess(finalCandidates[0]);
       setGameState("GUESSING");
     } else {
       setGameState("LOSE");
     }
   };
 
-  // Start Game
   const startGame = () => {
     setGameState("PLAYING");
     pickNextQuestion(TECH_DATABASE);
@@ -120,7 +106,6 @@ export function NeuralOracle({ open, setOpen }: { open: boolean; setOpen: (open:
       <DialogContent className="sm:max-w-md bg-zinc-950 border-zinc-800 p-0 overflow-hidden text-center flex flex-col items-center [&>button]:hidden">
         <VisuallyHidden><DialogTitle>Neural Oracle</DialogTitle></VisuallyHidden>
         
-        {/* Header */}
         <div className="w-full flex justify-between items-center p-4 border-b border-zinc-900 bg-zinc-900/50">
            <div className="flex items-center gap-2 text-purple-400">
               <BrainCircuit className="w-5 h-5" />
@@ -129,12 +114,10 @@ export function NeuralOracle({ open, setOpen }: { open: boolean; setOpen: (open:
            <button onClick={() => setOpen(false)} className="text-zinc-500 hover:text-white"><X className="w-5 h-5"/></button>
         </div>
 
-        {/* Content Area */}
         <div className="p-8 w-full min-h-[300px] flex flex-col items-center justify-center">
           
           <AnimatePresence mode="wait">
             
-            {/* 1. INTRO SCREEN */}
             {gameState === "INTRO" && (
               <motion.div 
                 key="intro"
@@ -159,7 +142,6 @@ export function NeuralOracle({ open, setOpen }: { open: boolean; setOpen: (open:
               </motion.div>
             )}
 
-            {/* 2. PLAYING SCREEN (Questions) */}
             {gameState === "PLAYING" && currentQ && (
               <motion.div 
                 key="question"
@@ -185,7 +167,6 @@ export function NeuralOracle({ open, setOpen }: { open: boolean; setOpen: (open:
               </motion.div>
             )}
 
-            {/* 3. GUESSING SCREEN (The Reveal) */}
             {gameState === "GUESSING" && guess && (
                <motion.div
                  key="guess"
@@ -215,7 +196,6 @@ export function NeuralOracle({ open, setOpen }: { open: boolean; setOpen: (open:
                </motion.div>
             )}
 
-            {/* 4. RESULT SCREEN */}
             {(gameState === "WIN" || gameState === "LOSE") && (
                 <motion.div
                     key="result"

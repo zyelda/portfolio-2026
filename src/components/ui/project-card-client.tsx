@@ -7,7 +7,6 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { X, Github, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-// Tipe Data Project
 export interface Project {
   id: number;
   title: string;
@@ -40,7 +39,6 @@ export default function ProjectClientView({ projects }: { projects: Project[] })
       </div>
 
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        {/* Tombol Close Bawaan Dihilangkan dengan [&>button]:hidden */}
         <DialogContent className="max-w-4xl p-0 overflow-hidden bg-background border-border/50 rounded-2xl h-[85vh] md:h-auto flex flex-col [&>button]:hidden">
             
             <VisuallyHidden>
@@ -50,7 +48,6 @@ export default function ProjectClientView({ projects }: { projects: Project[] })
             
             {selectedProject && (
                 <div className="flex flex-col md:flex-row h-full">
-                    {/* KIRI: Visual Pattern */}
                     <div className="w-full md:w-1/3 bg-zinc-950 flex items-center justify-center relative overflow-hidden p-6 border-b md:border-b-0 md:border-r border-border/50">
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
                         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent" />
@@ -61,16 +58,14 @@ export default function ProjectClientView({ projects }: { projects: Project[] })
                                     {selectedProject.title.substring(0, 2)}
                                 </span>
                             </div>
-                            <div className="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-mono text-muted-foreground inline-block">
-                                REPO_ID: {selectedProject.id}
+                            <div className="px-3 py-1 rounded-md border border-white/10 bg-white/5 text-[10px] font-mono text-muted-foreground inline-block">
+                                REPO ID: {selectedProject.id}
                             </div>
                         </div>
                     </div>
 
-                    {/* KANAN: Detail Info */}
                     <div className="w-full md:w-2/3 p-6 md:p-8 flex flex-col h-full bg-background relative overflow-y-auto">
                         
-                        {/* TOMBOL CLOSE (Diperbaiki Simetris) */}
                         <button 
                             onClick={() => setSelectedProject(null)}
                             className="absolute top-4 right-4 h-8 w-8 flex items-center justify-center rounded-full bg-secondary/50 hover:bg-destructive hover:text-white transition-all duration-200 z-10"
@@ -119,12 +114,11 @@ export default function ProjectClientView({ projects }: { projects: Project[] })
                             </div>
                         </div>
 
-                        {/* TOMBOL AKSI (Diperbaiki: Fixed Height agar Icon & Teks sejajar) */}
                         <div className="mt-8 pt-6 border-t border-border/50 flex flex-col sm:flex-row gap-3">
                             <Link 
                                 href={selectedProject.repo_link} 
                                 target="_blank"
-                                className="flex-1 h-11 inline-flex items-center justify-center gap-2 rounded-lg border border-border hover:bg-secondary transition-colors text-sm font-semibold"
+                                className="flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-border/50 bg-background/50 hover:bg-secondary/50 hover:border-primary/50 transition-all duration-300 py-3 px-4 text-sm sm:text-base font-medium"
                             >
                                 <Github className="w-4 h-4" />
                                 <span>Repository</span>
@@ -134,9 +128,9 @@ export default function ProjectClientView({ projects }: { projects: Project[] })
                                 <Link 
                                     href={selectedProject.demo_link} 
                                     target="_blank"
-                                    className="flex-1 h-11 inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-semibold shadow-lg shadow-primary/20"
+                                    className="flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-border/50 bg-background/50 hover:bg-secondary/50 hover:border-primary/50 transition-all duration-300 py-3 px-4 text-sm sm:text-base font-medium"
                                 >
-                                    <span>Live Demo</span>
+                                    <span>Demo</span>
                                     <ArrowUpRight className="w-4 h-4" />
                                 </Link>
                             )}

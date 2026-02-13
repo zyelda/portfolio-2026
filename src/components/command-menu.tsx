@@ -37,7 +37,6 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
   const { setTheme } = useTheme()
   const [openOracle, setOpenOracle] = React.useState(false);
 
-  // Shortcut Keyboard
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
@@ -66,7 +65,7 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
   }
 
   return (
-    <> {/* <--- WAJIB ADA FRAGMENT PEMBUNGKUS DI SINI */}
+    <> 
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
@@ -93,7 +92,6 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
               <span>Projects</span>
             </CommandItem>
 
-            {/* Tombol untuk membuka Game Oracle */}
             <CommandItem onSelect={() => runCommand(() => setOpenOracle(true))}>
               <Sparkles className="mr-2 h-4 w-4 text-purple-400" />
               <span>Mind Reader</span>
@@ -121,7 +119,6 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
         </CommandList>
       </CommandDialog>
 
-      {/* RENDER KOMPONEN GAME DI LUAR DIALOG UTAMA */}
       <NeuralOracle open={openOracle} setOpen={setOpenOracle} />
     </>
   )
