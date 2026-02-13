@@ -5,7 +5,7 @@ import HeroSection from "@/components/sections/hero-section";
 import AboutSection from "@/components/sections/about-section";
 import CertificateSection from "@/components/sections/certificate-section";
 import StoicQuote from "@/components/ui/stoic-quote";
-import { LombokExplore } from "@/components/ui/lombok-explore";
+import LombokExplore from "@/components/LombokExploreClient";
 
 export default function Home() {
   return (
