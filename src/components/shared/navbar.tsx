@@ -46,13 +46,9 @@ export default function Navbar() {
                     <div className="p-2 bg-primary/10 rounded-lg border border-primary/20">
                         <Terminal className="w-5 h-5 text-primary" />
                     </div>
-                    <div className="flex flex-col">
-                        <span className="text-[10px] text-muted-foreground">ONLINE</span>
-                    </div>
                 </div>
 
                 <div className="hidden md:flex items-center gap-6 px-4 py-2 bg-background/50 border border-border/50 rounded-full backdrop-blur-sm">
-                    <span className="text-xs font-mono text-primary animate-pulse">● LIVE</span>
                     <span className="text-xs font-mono">{time} WITA</span>
                 </div>
 
