@@ -189,7 +189,7 @@ export function LombokExplore() {
             {LOCATIONS.map((loc) => (
                <motion.div
                   key={loc.id}
-                  ref={(el) => (cardRefs.current[loc.id] = el)}
+                  ref={(el) => { cardRefs.current[loc.id] = el; }}
                   onClick={() => setActiveLocation(loc)}
                   className={`relative flex-shrink-0 w-[85vw] md:w-[calc(33.333%-11px)] text-left p-6 rounded-3xl border backdrop-blur-md transition-all duration-500 snap-center group cursor-pointer overflow-hidden ${
                      activeLocation.id === loc.id 
