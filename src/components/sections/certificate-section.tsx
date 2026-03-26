@@ -45,23 +45,23 @@ export default function CertificateSection() {
 
       {/* MODAL PDF VIEWER */}
       <Dialog open={!!selectedCert} onOpenChange={() => setSelectedCert(null)}>
-        <DialogContent className="max-w-4xl h-[85vh] p-0 bg-zinc-950 border-zinc-800 overflow-hidden flex flex-col [&>button]:hidden">
+        <DialogContent className="max-w-4xl h-[85vh] p-0 bg-background border-border overflow-hidden flex flex-col [&>button]:hidden">
             
             <VisuallyHidden>
                 <DialogTitle>Certificate Viewer</DialogTitle>
             </VisuallyHidden>
 
-            <div className="flex justify-between items-center p-4 border-b border-zinc-800 bg-zinc-900/50 backdrop-blur">
+            <div className="flex justify-between items-center p-4 border-b border-border bg-muted/50 backdrop-blur">
                 <span className="text-sm font-mono text-muted-foreground">DOC VIEWER</span>
                 <button 
                     onClick={() => setSelectedCert(null)}
-                    className="p-2 hover:bg-zinc-800 rounded-full transition-colors"
+                    className="p-2 hover:bg-muted text-foreground rounded-full transition-colors"
                 >
                     <X className="w-5 h-5" />
                 </button>
             </div>
             
-            <div className="flex-1 w-full h-full bg-zinc-900 relative">
+            <div className="flex-1 w-full h-full bg-secondary/20 dark:bg-zinc-900 relative">
                 {selectedCert ? (
                     <iframe 
                         src={`${selectedCert}#toolbar=0&navpanes=0`} 
@@ -112,19 +112,19 @@ function TiltCard({ cert }: { cert: Certificate }) {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{ transformStyle: "preserve-3d", transform }}
-        className="relative h-64 w-full rounded-xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 p-6 flex flex-col justify-between group cursor-pointer hover:shadow-2xl transition-shadow"
+        className="relative h-64 w-full rounded-xl bg-card border border-border p-6 flex flex-col justify-between group cursor-pointer shadow-sm hover:shadow-xl hover:border-primary/30 transition-shadow dark:bg-gradient-to-br dark:from-zinc-900 dark:to-zinc-950 dark:border-zinc-800"
       >
         <div style={{ transform: "translateZ(50px)" }} className={`absolute -right-10 -top-10 w-32 h-32 bg-gradient-to-br ${cert.color} blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity duration-500`}></div>
         <div style={{ transform: "translateZ(20px)" }} className="relative z-10">
           <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${cert.color} flex items-center justify-center mb-4 shadow-lg`}>
             <Award className="text-white w-6 h-6" />
           </div>
-          <h3 className="text-xl font-bold text-white mb-1">{cert.title}</h3>
-          <p className="text-sm text-zinc-400 font-mono">{cert.issuer} • {cert.date}</p>
+          <h3 className="text-xl font-bold text-foreground mb-1">{cert.title}</h3>
+          <p className="text-sm text-muted-foreground font-mono">{cert.issuer} • {cert.date}</p>
         </div>
         <div style={{ transform: "translateZ(30px)" }} className="relative z-10">
-          <p className="text-sm text-zinc-500 line-clamp-2 mb-4">{cert.description}</p>
-          <div className="flex items-center gap-2 text-xs font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+          <p className="text-sm text-muted-foreground/80 line-clamp-2 mb-4">{cert.description}</p>
+          <div className="flex items-center gap-2 text-xs font-bold text-foreground dark:text-white opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
             <span>VIEW DOCUMENT</span>
             <ExternalLink className="w-3 h-3" />
           </div>

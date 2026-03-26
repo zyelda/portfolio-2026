@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { CodingStats } from "@/components/coding-stats";
 import MagneticSocials from "@/components/ui/magnetic-socials";
+import { SpotifyNowPlaying } from "@/components/ui/spotify-now-playing";
 
 export default function HeroSection() {
     const scrollToProjects = () => {
@@ -72,11 +73,13 @@ export default function HeroSection() {
                 Aditias Zulmatoriq
                 <br/>
                 <span className="text-green-500">● Available for Hire</span>
+                </div>
             </div>
-            </div>
+            
 
             <div className="relative w-full max-w-xs">
                 <div className="relative bg-background border border-border rounded-xl shadow-2xl overflow-hidden p-1">
+                <SpotifyNowPlaying />
                 <CodingStats />
                 </div>
             </div>

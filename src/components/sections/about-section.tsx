@@ -42,10 +42,10 @@ export default function AboutSection() {
             <span className="font-mono text-sm font-bold">BIO DATA</span>
           </div>
           <p className="text-lg leading-relaxed text-foreground/90">
-            Halo, saya <span className="font-bold text-white">Aditias Zulmatoriq</span>. 
+            Halo, saya <span className="font-bold text-foreground">Aditias Zulmatoriq</span>. 
             Seorang mahasiswa Teknik Informatika yang memiliki ketertarikan mendalam pada 
-            <span className="text-blue-400"> Tech Enthusiast</span> dan 
-            <span className="text-purple-400"> Fullstack Development</span>.
+            <span className="text-blue-500 dark:text-blue-400"> Tech Enthusiast</span> dan 
+            <span className="text-purple-500 dark:text-purple-400"> Fullstack Development</span>.
             <br /><br />
             Saya suka membangun sistem yang kompleks namun memiliki antarmuka yang bersih (Clean UI). 
             Saat ini sedang fokus mengembangkan tools keamanan siber dan platform web modern.
@@ -58,18 +58,18 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="relative overflow-hidden p-6 rounded-2xl bg-zinc-900 border border-border/50 group"
+          className="relative overflow-hidden p-6 rounded-2xl bg-card dark:bg-zinc-900 border border-border/50 group"
         >
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:16px_16px]"></div>
+          <div className="absolute inset-0 opacity-10 dark:opacity-20 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:16px_16px]"></div>
           <div className="relative z-10 h-full flex flex-col justify-between">
-            <div className="flex items-center gap-2 text-green-500">
+            <div className="flex items-center gap-2 text-green-600 dark:text-green-500">
               <MapPin className="w-5 h-5" />
               <span className="font-mono text-xs">CURRENT LOCATION</span>
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-white">Lombok, ID</h3>
-              <p className="text-xs text-zinc-400 mt-1">Mataram City</p>
-              <p className="text-xs text-green-500 mt-2 animate-pulse">● Active</p>
+              <h3 className="text-2xl font-bold text-foreground">Lombok, ID</h3>
+              <p className="text-xs text-muted-foreground mt-1">Mataram City</p>
+              <p className="text-xs text-green-600 dark:text-green-500 mt-2 animate-pulse">● Active</p>
             </div>
           </div>
         </motion.div>
@@ -156,10 +156,10 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="md:col-span-2 p-6 rounded-2xl bg-gradient-to-br from-green-900/20 to-emerald-900/10 border border-green-500/20 hover:border-green-500/40 transition-colors"
+          className="md:col-span-2 p-6 rounded-2xl bg-gradient-to-br from-green-100 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/10 border border-green-500/20 hover:border-green-500/40 transition-colors"
         >
           <div className="flex justify-between items-start">
-            <div className="flex items-center gap-2 text-green-400">
+            <div className="flex items-center gap-2 text-green-600 dark:text-green-400">
               <Heart className="w-5 h-5" />
               <span className="font-mono text-sm font-bold">SIDE QUESTS</span>
             </div>
@@ -167,11 +167,11 @@ export default function AboutSection() {
           </div>
           
           <div className="mt-4 grid grid-cols-2 gap-4">
-             <div className="bg-background/40 p-3 rounded-lg border border-white/5">
+             <div className="bg-background/60 dark:bg-background/40 p-3 rounded-lg border border-border/50 dark:border-white/5">
                 <h5 className="font-bold text-sm">Hiking & Nature</h5>
                 <p className="text-xs text-muted-foreground">Founder "Jejak Pendaki". Menikmati alam untuk reset pikiran.</p>
              </div>
-             <div className="bg-background/40 p-3 rounded-lg border border-white/5">
+             <div className="bg-background/60 dark:bg-background/40 p-3 rounded-lg border border-border/50 dark:border-white/5">
                 <h5 className="font-bold text-sm">Gaming & CTF</h5>
                 <p className="text-xs text-muted-foreground">Capture The Flag player dan penikmat game strategi.</p>
              </div>

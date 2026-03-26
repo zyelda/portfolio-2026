@@ -5,8 +5,8 @@ import { MessageSquare, X, Send, Bot, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import ReactMarkdown from "react-markdown";
 
 type Message = {
   role: "user" | "system";
@@ -16,7 +16,7 @@ type Message = {
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "system", content: "Halo! Saya Neural V1. Ada yang bisa saya bantu tentang portfolio ini?" }
+    { role: "system", content: "Halo bro! Gw **Neural V1** Asisten yang punya portfolio ini. Ada yang mau lu tanyain soal Toriq?" }
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -46,7 +46,7 @@ export function ChatWidget() {
       setMessages((prev) => [...prev, { role: "system", content: data.reply }]);
     } catch (error) {
       console.error("Gagal mengirim pesan:", error);
-      setMessages((prev) => [...prev, { role: "system", content: "Maaf, sistem sedang offline." }]);
+      setMessages((prev) => [...prev, { role: "system", content: "Sori bro, server gw lagi ngadat nih." }]);
     } finally {
       setIsLoading(false);
     }
@@ -61,15 +61,16 @@ export function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="mb-4 w-[350px] sm:w-[400px] h-[500px] bg-background/80 backdrop-blur-xl border border-border/50 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+            // Support Light/Dark Mode untuk Container Utama
+            className="mb-4 w-[350px] sm:w-[400px] h-[500px] bg-background/95 backdrop-blur-xl border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
           >
             {/* Header */}
-            <div className="p-4 border-b border-border/50 bg-secondary/30 flex items-center justify-between">
+            <div className="p-4 border-b border-border bg-muted/50 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="font-semibold text-sm">Neural Assistant</span>
+                <span className="font-semibold text-sm text-foreground">Neural Assistant</span>
               </div>
-              <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => setIsOpen(false)}>
+              <Button variant="ghost" size="icon" className="h-6 w-6 text-muted-foreground hover:text-foreground" onClick={() => setIsOpen(false)}>
                 <X className="w-4 h-4" />
               </Button>
             </div>
@@ -80,42 +81,58 @@ export function ChatWidget() {
                 <div
                   key={idx}
                   className={cn(
-                    "flex gap-3 text-sm max-w-[85%]",
+                    "flex gap-3 text-sm max-w-[90%]",
                     msg.role === "user" ? "ml-auto flex-row-reverse" : ""
                   )}
                 >
+                  {/* Avatar Bubble */}
                   <div className={cn(
                     "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border",
-                    msg.role === "user" ? "bg-primary text-primary-foreground border-primary" : "bg-muted border-border"
+                    msg.role === "user" 
+                      ? "bg-primary text-primary-foreground border-primary" 
+                      : "bg-muted border-border text-foreground"
                   )}>
                     {msg.role === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
                   </div>
+                  
+                  {/* Chat Bubble & Markdown */}
                   <div className={cn(
-                    "p-3 rounded-2xl",
+                    "p-3 rounded-2xl overflow-hidden",
                     msg.role === "user" 
                       ? "bg-primary text-primary-foreground rounded-tr-none" 
-                      : "bg-muted/50 border border-border/50 rounded-tl-none"
+                      : "bg-muted/80 border border-border text-foreground rounded-tl-none"
                   )}>
-                    {msg.content}
+                    {msg.role === "user" ? (
+                      msg.content
+                    ) : (
+                      // Styling Markdown yang support Light/Dark Mode
+                      <div className="text-sm leading-relaxed [&>p]:mb-2 [&>p:last-child]:mb-0 [&>strong]:text-purple-600 dark:[&>strong]:text-purple-400 [&>strong]:font-bold [&>ul]:list-disc [&>ul]:pl-4">
+                        <ReactMarkdown>
+                          {msg.content}
+                        </ReactMarkdown>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
+
+              {/* Loading Indicator */}
               {isLoading && (
                 <div className="flex gap-3">
                    <div className="w-8 h-8 rounded-full bg-muted border border-border flex items-center justify-center">
-                    <Bot className="w-4 h-4 animate-pulse" />
+                    <Bot className="w-4 h-4 animate-pulse text-muted-foreground" />
                   </div>
-                  <div className="bg-muted/50 p-3 rounded-2xl rounded-tl-none border border-border/50 text-xs text-muted-foreground flex items-center gap-1">
-                    <span className="w-1 h-1 bg-current rounded-full animate-bounce" style={{ animationDelay: "0ms" }}/>
-                    <span className="w-1 h-1 bg-current rounded-full animate-bounce" style={{ animationDelay: "150ms" }}/>
-                    <span className="w-1 h-1 bg-current rounded-full animate-bounce" style={{ animationDelay: "300ms" }}/>
+                  <div className="bg-muted/50 p-3 rounded-2xl rounded-tl-none border border-border text-xs flex items-center gap-1">
+                    <span className="w-1 h-1 bg-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}/>
+                    <span className="w-1 h-1 bg-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}/>
+                    <span className="w-1 h-1 bg-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}/>
                   </div>
                 </div>
               )}
             </div>
 
             {/* Input Area */}
-            <div className="p-4 border-t border-border/50 bg-background/50">
+            <div className="p-4 border-t border-border bg-muted/30">
               <form 
                 onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
                 className="flex gap-2"
@@ -123,10 +140,10 @@ export function ChatWidget() {
                 <Input 
                   value={input} 
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Tanya sesuatu..." 
-                  className="bg-secondary/50 border-0 focus-visible:ring-1"
+                  placeholder="Ketik pesan..." 
+                  className="bg-background border-border focus-visible:ring-primary text-foreground placeholder:text-muted-foreground"
                 />
-                <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>
+                <Button type="submit" size="icon" disabled={isLoading || !input.trim()} className="bg-primary hover:bg-primary/90 text-primary-foreground">
                   <Send className="w-4 h-4" />
                 </Button>
               </form>
@@ -135,11 +152,10 @@ export function ChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* Trigger Button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
         size="icon"
-        className="h-14 w-14 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 bg-primary text-primary-foreground"
+        className="h-14 w-14 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 bg-primary text-primary-foreground hover:bg-primary/90"
       >
         {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
       </Button>

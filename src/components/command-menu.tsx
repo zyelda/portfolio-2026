@@ -17,9 +17,7 @@ import {
 
 import {
   CommandDialog,
-  CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
   CommandSeparator,
@@ -35,7 +33,7 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
   const router = useRouter()
   const pathname = usePathname()
   const { setTheme } = useTheme()
-  const [openOracle, setOpenOracle] = React.useState(false);
+  const [openOracle, ReactSetOpenOracle] = React.useState(false);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -67,9 +65,8 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
   return (
     <> 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+        {/* CommandInput dan CommandEmpty dihapus agar search bar hilang */}
+        <CommandList className="py-2"> {/* Tambahan padding agar menu tidak mepet ke atas */}
           
           <CommandGroup heading="Suggestions">
             <CommandItem onSelect={() => runCommand(() => scrollToSection('home'))}>
@@ -92,7 +89,7 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
               <span>Projects</span>
             </CommandItem>
 
-            <CommandItem onSelect={() => runCommand(() => setOpenOracle(true))}>
+            <CommandItem onSelect={() => runCommand(() => ReactSetOpenOracle(true))}>
               <Sparkles className="mr-2 h-4 w-4 text-purple-400" />
               <span>Mind Reader</span>
             </CommandItem>
@@ -116,10 +113,11 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
               <span>System</span>
             </CommandItem>
           </CommandGroup>
+
         </CommandList>
       </CommandDialog>
 
-      <NeuralOracle open={openOracle} setOpen={setOpenOracle} />
+      <NeuralOracle open={openOracle} setOpen={ReactSetOpenOracle} />
     </>
   )
-}
+} 
