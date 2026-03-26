@@ -66,6 +66,7 @@ export default function HeroSection() {
                 fill
                 className="object-cover hover:scale-110 transition-transform duration-500"
                 priority
+                sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
                 />
             </div>
 

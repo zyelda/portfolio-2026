@@ -15,6 +15,7 @@ export function AnonymousForm() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
+  // Ganti bagian handleSubmit lu jadi begini:
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
@@ -22,20 +23,20 @@ export function AnonymousForm() {
     setStatus("loading");
 
     try {
-      // Tembak data ke tabel anonymous_messages di Supabase
-      const { error } = await supabase
-        .from("anonymous_messages")
-        .insert([{ message: message.trim() }]);
+      // Panggil API Route buatan kita, bukan supabase langsung
+      const res = await fetch("/api/anonymous", {
+        method: "POST",
+        body: JSON.stringify({ message: message.trim() }),
+        headers: { "Content-Type": "application/json" },
+      });
 
-      if (error) throw error;
+      if (!res.ok) throw new Error("Gagal mengirim");
 
       setStatus("success");
       setMessage("");
-      
-      // Balikin ke status awal setelah 3 detik
       setTimeout(() => setStatus("idle"), 3000);
     } catch (error) {
-      console.error("Gagal ngirim pesan:", error);
+      console.error("Error:", error);
       setStatus("error");
       setTimeout(() => setStatus("idle"), 3000);
     }
