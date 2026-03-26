@@ -6,8 +6,11 @@ import { cn } from "@/lib/utils"; // Pastikan lu punya utility cn bawaan shadcn
 
 export function SpotifyNowPlaying() {
   const [data, setData] = useState<any>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
     const fetchNowPlaying = async () => {
       const res = await fetch("/api/now-playing");
       const json = await res.json();
@@ -18,6 +21,8 @@ export function SpotifyNowPlaying() {
     const interval = setInterval(fetchNowPlaying, 30000); 
     return () => clearInterval(interval);
   }, []);
+
+  if (!mounted) return null;
 
   const isPlaying = data?.isPlaying;
 
