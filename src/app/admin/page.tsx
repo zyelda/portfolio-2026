@@ -158,10 +158,9 @@ export default function AdminDashboard() {
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-6 h-6 text-green-500" />
-            <h1 className="font-black tracking-widest text-lg">NEURAL <span className="text-primary">OVERSEER</span></h1>
           </div>
           <Button onClick={handleLogout} variant="destructive" size="sm" className="font-bold">
-            <LogOut className="w-4 h-4 mr-2" /> LOGOUT
+            <LogOut className="w-4 h-4 mr-2" />
           </Button>
         </div>
       </header>
@@ -171,7 +170,7 @@ export default function AdminDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-2xl font-bold flex items-center gap-2">
-              <Mail className="w-6 h-6 text-primary" /> INBOX RAHASIA
+              <Mail className="w-6 h-6 text-primary" /> INBOX
             </h2>
             <p className="text-muted-foreground text-sm mt-1">
               Pesan masuk secara real-time. Total: {messages.length} pesan.
@@ -179,7 +178,6 @@ export default function AdminDashboard() {
           </div>
           <div className="flex items-center gap-2 text-xs font-bold text-green-500 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20">
             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-            LIVE CONNECTION
           </div>
         </div>
 

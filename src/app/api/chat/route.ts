@@ -66,7 +66,6 @@ export async function POST(req: Request) {
         BATASAN:
         - Jika ditanya hal di luar konteks portfolio/teknologi (misal: politik/SARA), tolak dengan sopan.
         - Fokus jawaban selalu kembali ke mempromosikan skill dan pengalaman Aditias.
-        "${message}"
     `;
 
     const completion = await groq.chat.completions.create({

@@ -26,10 +26,9 @@ export function TerminalHacking() {
 
   const initGame = useCallback(() => {
     setStatus("booting");
-    setHistory([{ msg: "INITIALIZING NEURAL BREACH PROTOCOL...", type: "info" }]);
+    setHistory([{ msg: "...", type: "info" }]);
     
     setTimeout(() => {
-      // Acak dan pilih 10 kata
       const shuffled = [...WORD_LIST].sort(() => 0.5 - Math.random());
       const selectedWords = shuffled.slice(0, 10);
       const target = selectedWords[Math.floor(Math.random() * selectedWords.length)];
@@ -39,8 +38,7 @@ export function TerminalHacking() {
       setAttempts(4);
       setHistory(prev => [
         ...prev, 
-        { msg: "BYPASSING MAINFRAME SECURITY...", type: "info" },
-        { msg: "ENTER PASSWORD TO UNLOCK SYSTEM.", type: "info" }
+        { msg: "ENTER PASSWORD TO UNLOCK.", type: "info" }
       ]);
       setStatus("playing");
     }, 1500);
@@ -59,7 +57,6 @@ export function TerminalHacking() {
   const handleGuess = (guess: string) => {
     if (status !== "playing") return;
 
-    // Hitung kemiripan (huruf yang sama di posisi yang sama)
     let likeness = 0;
     for (let i = 0; i < guess.length; i++) {
       if (guess[i] === targetWord[i]) likeness++;
@@ -91,7 +88,6 @@ export function TerminalHacking() {
     }
   };
 
-  // Generate random memory address string (e.g. 0xF4A1)
   const getMemAddress = (index: number) => `0x${(61440 + index * 12).toString(16).toUpperCase()}`;
 
   return (

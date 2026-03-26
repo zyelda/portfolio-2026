@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getStoicQuote } from "@/lib/stoic-service";
 import { Quote } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -9,7 +8,10 @@ export default function StoicQuote() {
   const [quote, setQuote] = useState<string>("Loading ancient wisdom...");
 
   useEffect(() => {
-    getStoicQuote().then(setQuote);
+    fetch("/api/stoic")
+      .then((res) => res.json())
+      .then((data) => setQuote(data.quote))
+      .catch(() => setQuote("Tetap tenang hadapi bug. — Neural V1"));
   }, []);
 
   return (
