@@ -61,7 +61,7 @@ export default function HeroSection() {
             <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition duration-500 animate-pulse"></div>
             <div className="relative w-full h-full rounded-full border-2 border-white/10 overflow-hidden bg-background shadow-2xl">
                 <Image 
-                src="/profile.png" 
+                src="/profile-v2.jpeg" 
                 alt="Profile Picture"
                 fill
                 className="object-cover hover:scale-110 transition-transform duration-500"
